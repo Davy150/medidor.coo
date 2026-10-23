@@ -1,14 +1,13 @@
 const express = require('express');
+const path = require('path');
 const calculos = require('./calculos');
 
 const app = express();
 const PORTA = 3000;
 
-
 app.use(express.json());
 
-
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.post('/api/simular', (req, res) => {
