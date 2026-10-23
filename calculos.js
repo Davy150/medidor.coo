@@ -1,4 +1,4 @@
-```javascript
+
 const cfg = require('./config');
 
 function consumoMensalKwh(aparelho) {
@@ -105,4 +105,3 @@ module.exports = {
     paineisNecessarios,
     simular
 };
-```
