@@ -4,24 +4,24 @@ const calculos = require('./calculos');
 const app = express();
 const PORTA = 3000;
 
-// Permite que o servidor receba dados em formato JSON
+
 app.use(express.json());
 
-// Abre a página principal do projeto
+
 app.use(express.static('public'));
 
-// Cria a rota que faz a simulação
+
 app.post('/api/simular', (req, res) => {
     const aparelhos = req.body.aparelhos;
 
-    // Verifica se a lista de aparelhos foi enviada corretamente
+
     if (!Array.isArray(aparelhos) || aparelhos.length === 0) {
         return res.status(400).json({
             erro: 'Adicione pelo menos um aparelho.'
         });
     }
 
-    // Verifica os dados de cada aparelho
+   
     for (let i = 0; i < aparelhos.length; i++) {
         const aparelho = aparelhos[i];
 
@@ -50,10 +50,10 @@ app.post('/api/simular', (req, res) => {
         }
     }
 
-    // Faz os cálculos
+
     const resultado = calculos.simular(aparelhos);
 
-    // Arredonda os valores para duas casas decimais
+    
     resultado.consumoKwhMes = arredondar(resultado.consumoKwhMes);
     resultado.custoEnergia = arredondar(resultado.custoEnergia);
     resultado.adicionalBandeira = arredondar(resultado.adicionalBandeira);
@@ -69,16 +69,14 @@ app.post('/api/simular', (req, res) => {
         resultado.detalhes[i].percentual = arredondar(resultado.detalhes[i].percentual);
     }
 
-    // Envia o resultado para quem fez a requisição
+
     res.json(resultado);
 });
 
-// Função para arredondar números em duas casas decimais
 function arredondar(numero) {
     return Math.round(numero * 100) / 100;
 }
 
-// Inicia o servidor
 app.listen(PORTA, () => {
     console.log(`Servidor funcionando em http://localhost:${PORTA}`);
 });
