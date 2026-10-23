@@ -128,7 +128,8 @@ formulario.addEventListener('submit', async function(event) {
 
         mensagem.textContent = 'Simulação realizada com sucesso!';
 
-        console.log(resultado);
+        // Chamada adicionada para renderizar os dados no ecrã
+        mostrarResultados(resultado);
 
     } catch (erro) {
         mensagem.textContent = 'Erro ao conectar com o servidor.';

@@ -3,16 +3,13 @@ const path = require('path');
 const calculos = require('./calculos');
 
 const app = express();
-const PORTA = 3000;
+const PORTA = 5000; // <--- Mude de 3000 para 5000
 
 app.use(express.json());
-
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 app.post('/api/simular', (req, res) => {
     const aparelhos = req.body.aparelhos;
-
 
     if (!Array.isArray(aparelhos) || aparelhos.length === 0) {
         return res.status(400).json({
@@ -20,7 +17,6 @@ app.post('/api/simular', (req, res) => {
         });
     }
 
-   
     for (let i = 0; i < aparelhos.length; i++) {
         const aparelho = aparelhos[i];
 
@@ -49,10 +45,8 @@ app.post('/api/simular', (req, res) => {
         }
     }
 
-
     const resultado = calculos.simular(aparelhos);
 
-    
     resultado.consumoKwhMes = arredondar(resultado.consumoKwhMes);
     resultado.custoEnergia = arredondar(resultado.custoEnergia);
     resultado.adicionalBandeira = arredondar(resultado.adicionalBandeira);
@@ -67,7 +61,6 @@ app.post('/api/simular', (req, res) => {
         resultado.detalhes[i].custo = arredondar(resultado.detalhes[i].custo);
         resultado.detalhes[i].percentual = arredondar(resultado.detalhes[i].percentual);
     }
-
 
     res.json(resultado);
 });
