@@ -3,7 +3,7 @@ const path = require('path');
 const calculos = require('./calculos');
 
 const app = express();
-const PORTA = 5000; // <--- Mude de 3000 para 5000
+const PORTA = 5000; 
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
